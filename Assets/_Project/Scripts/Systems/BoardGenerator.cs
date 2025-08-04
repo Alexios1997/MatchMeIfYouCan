@@ -18,7 +18,10 @@ public class BoardGenerator : MonoBehaviour, IGenerator
     [SerializeField] private float _cols;
     [SerializeField] private float _cardPreferedSizeWidth;
     [SerializeField] private float _cardPreferedSizeHeight;
-
+    [Space]
+    [Header("Values")]
+    [SerializeField] private CardListVariable _cardList;
+    [SerializeField] private GameEvent _OnBoardGenerated;
 
 
     private float _calculatedCardWidth;
@@ -43,9 +46,13 @@ public class BoardGenerator : MonoBehaviour, IGenerator
 
     private void Initialize()
     {
+        // Clear List
+        _cardList.Clear();
+        
         // Calculate the ideal card width and height
         _calculatedCardWidth = _tableRectTransform.rect.width / _cols;
         _calculatedCardHeight = _tableRectTransform.rect.height / _rows;
+        
         // Set Sizes the same as Cards
         _sizeWidth = _cardPreferedSizeWidth;
         _sizeHeight = _cardPreferedSizeHeight;
@@ -54,6 +61,12 @@ public class BoardGenerator : MonoBehaviour, IGenerator
     
     public void Generate()
     {
+
+        if ((_rows * _cols) % 2 != 0)
+        {
+            Debug.LogError("In order to create a card grid for a matching game, it needs to be EVEN number.");
+            return;
+        }
         
         // Check if the calculated Card width is less than 
         // the fixed Width Preferred size width we have set
@@ -81,12 +94,16 @@ public class BoardGenerator : MonoBehaviour, IGenerator
             _sizeHeight = _cardPreferedSizeHeight;
         }
 
+        
+        List<GameObject> generatedCards = new List<GameObject>();
+        
         // Create the Grid
         for (int row = 0; row < _rows; row++)
         {
             for (int col = 0; col < _cols; col++)
             {
-                RectTransform cardRect = Instantiate(_cardPrefab, _tableRectTransform, false).GetComponent<RectTransform>();
+                GameObject card = Instantiate(_cardPrefab, _tableRectTransform, false);
+                RectTransform cardRect = card.GetComponent<RectTransform>();
 
                 // Always set anchors of the created card to Upper Left
                 cardRect.anchorMin = new Vector2(0, 1);
@@ -103,7 +120,13 @@ public class BoardGenerator : MonoBehaviour, IGenerator
 
                 // Finally set the Position of the cards
                 cardRect.anchoredPosition = new Vector2(posX, posY);
+                
+                // Add them to the List 
+                _cardList.Add(card);
             }
         }
+        _OnBoardGenerated.Raise();
+        
+
     }
 }
