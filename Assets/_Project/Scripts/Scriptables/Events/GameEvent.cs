@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
+// Implementing SOAP (ScriptableObject Architecture Pattern
+// for smooth and Plug-Play Event Driven Approach
 public class GameEvent<T> : ScriptableObject
 {
     readonly List<IGameEventListener<T>> _listeners = new();

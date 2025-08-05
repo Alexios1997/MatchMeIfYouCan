@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// The Selected Cards holder
 [CreateAssetMenu(menuName = "Scriptables/Variables/Selected Card List")]
 public class SelectedCardListVariable : ScriptableObject
 {

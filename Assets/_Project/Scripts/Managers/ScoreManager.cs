@@ -6,15 +6,21 @@ using UnityEngine.UI;
 using System.IO;
 public class ScoreManager : MonoBehaviour
 {
+    [Header("Injected Dependencies")]
+    [Space]
+    [Header("GameObjects")]
     [SerializeField] private Text _scoreText;
     [SerializeField] private Text _turnText;
-
+    [Space]
+    [Header("Variables")]
     [SerializeField] private int _score;
     [SerializeField] private int _turns;
     [SerializeField] private IntVariable _currentLevel;
     
+    // The instance of Save Data
     private SaveData _currentSave;
     
+    // Saving Score and Level
     private void Awake()
     {
         _currentSave = SaveManager.Load();
@@ -34,6 +40,7 @@ public class ScoreManager : MonoBehaviour
         DisplayScore();
     }
 
+    // Update Score
     public void UpdateScore()
     {
         _score++;
@@ -41,22 +48,26 @@ public class ScoreManager : MonoBehaviour
         
     }
 
+    // Display Score
     private void DisplayScore()
     {
         _scoreText.text = "Score: " + _score;
     }
 
+    // Update Turns
     public void UpdateTurn()
     {
         _turns++;
         DisplayTurns();
     }
     
+    // Display Turns
     private void DisplayTurns()
     {
         _turnText.text = "Turns: " + _turns;
     }
 
+    // Wait 1 second and save Level and score
     public void Save()
     {
         StartCoroutine(WaitAndSave());

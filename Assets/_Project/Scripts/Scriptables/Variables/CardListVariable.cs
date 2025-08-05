@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Holding All cards Created from Board Generator
+// according to cols and rows
 [CreateAssetMenu(menuName = "Scriptables/Variables/Card List")]
 public class CardListVariable : ScriptableObject
 {

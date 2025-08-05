@@ -6,8 +6,8 @@ public static class AnimationUI
 {
     
     // UI Functions Animations
-    
-    // For A float
+    // TweenFloat is gonna be used only
+    // for tweening Floats
     public static IEnumerator TweenFloat(
         float start,
         float end,
@@ -19,7 +19,6 @@ public static class AnimationUI
         {
             easingFunction = EaseLinear;
         }
-
         float elapsed = 0f;
         while (elapsed < duration)
         {
@@ -32,6 +31,7 @@ public static class AnimationUI
         onUpdate?.Invoke(end);
     }
     
+    // TweenVec3 used to tween Vector 3
     public static IEnumerator TweenVec3(
         Vector3 start,
         Vector3 end,
@@ -57,12 +57,7 @@ public static class AnimationUI
         onUpdate?.Invoke(end);
     }
     
-    
-    
-    
-    
     // Ease Functions for smooth animations
-    
     public static float EaseLinear(float t)
     {
         return t;

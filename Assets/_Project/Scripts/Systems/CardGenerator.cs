@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Implementing the IGenerator As it is A generator Class
 public class CardGenerator : MonoBehaviour, IGenerator
 {
+    [Header("Injected Dependencies")]
     [Space]
-    [Header("Values")]
-    
-    [SerializeField] private GameEvent _OnCardsPopulated;
+    [Header("Variables")]
     [SerializeField] private CardListVariable _cardList;
     [SerializeField] private IntVariable _currentLevel;
     [SerializeField] private GameConfig _gameConfig;
+    [Space]
+    [Header("Events")]
+    [SerializeField] private GameEvent _OnCardsPopulated;
 
-
+    // Private and NOT serialized variables
     private List<int> _uniqueCardTypesCounter = new List<int>();
     private int _pairs;
+    
+    // Start Making Pairs and populating cards
     public void Generate()
     {
-       
        // Total pairs that you will need
        _pairs = _cardList.Cards.Count / 2;
        
@@ -28,14 +32,18 @@ public class CardGenerator : MonoBehaviour, IGenerator
            return;
        }
 
+       // In this List Counter add Zeros 
        for (int i = 0; i < _gameConfig.leveConfigs[_currentLevel.value]._uniqueCardTypes.Count; i++)
        {
            _uniqueCardTypesCounter.Add(0);
        }
-       
-       Debug.Log(_uniqueCardTypesCounter.Count);
 
+       // random number
        int rand;
+       
+       // For every Card now We need:
+       // 1. To pick a random number and check through List Counter if it is more than 2 which means Pair for this has already been created
+       // 2. Populate card if not 2
        for (int i = 0; i < _cardList.Cards.Count; i++)
        {
            while (true)

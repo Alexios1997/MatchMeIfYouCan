@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
+// Listener to Game Event and Response to it
 public class GameEventListener<T> : MonoBehaviour, IGameEventListener<T>
 {
     [SerializeField] GameEvent<T> gameEvent;

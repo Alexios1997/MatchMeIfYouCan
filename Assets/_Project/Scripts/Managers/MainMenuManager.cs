@@ -8,22 +8,21 @@ public class MainMenuManager : MonoBehaviour
 {
     [Header("Injected Dependencies")]
     [Space]
-    [Header("UI Panels")]
-    [Tooltip("")]
+    [Header("GameObjects")]
     [SerializeField] private RectTransform _mainMenuRectTransform;
-    [Tooltip("")]
     [SerializeField] private RectTransform _optionsMenuRectTransform;
     [Space]
     [Header("Tween Values")]
-    [Tooltip("")]
+    [Tooltip("Duration for scaling Up/Down the Main Panel")]
     [SerializeField] private float _durationScale_Panel;
-    [Tooltip("")]
+    [Tooltip("Duration for moving the Options Panel")]
     [SerializeField] private float _durationMoving_Panel;
-    [Tooltip("")]
+    [Tooltip("Variable for scaling Up/Down the Main Panel")]
     [SerializeField] private Vector3 _scaleDownVector_Panel;
-    [Tooltip("")]
+    [Tooltip("Variable for moving the Options Panel")]
     [SerializeField] private float _positionXAway_Panel;
     
+    // Setting Up things for tweening
     void Start()
     {
         _optionsMenuRectTransform.anchoredPosition = new Vector3(_positionXAway_Panel,_optionsMenuRectTransform.anchoredPosition.y);
@@ -32,42 +31,45 @@ public class MainMenuManager : MonoBehaviour
         StartCoroutine(ScaleUpRectTransform());
     }
 
-
-
+    // Load Next Scene and PLay!
     public void PlayButtonClicked(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
 
+    // Exit Game
     public void ExitButtonClicked()
     {
         Application.Quit();
     }
     
+    // Option Button Clicked
     public void OptionButtonClicked()
     {
         StartCoroutine(OptionSequenceCoroutine());
     }
 
+    // Main Menu Button Clicked
     public void MainMenuButtonClicked()
     {
         StartCoroutine(MainMenuSequenceCoroutine());
     }
 
-
+    // Sequencer for when Menu Button CLicked
     private IEnumerator MainMenuSequenceCoroutine()
     {
         yield return StartCoroutine(OptionsPanelMoveAway());
         yield return StartCoroutine(ScaleUpRectTransform());
     }
     
+    // Sequencer for when Option Button CLicked
     private IEnumerator OptionSequenceCoroutine()
     {
         yield return StartCoroutine(ScaleDownRectTransform());
         yield return StartCoroutine(OptionsPanelMoveInside());
     }
     
-    
+    // Scale Up Main Panel Enumerator
     private IEnumerator ScaleUpRectTransform()
     {
         _mainMenuRectTransform.gameObject.SetActive(true);
@@ -80,6 +82,7 @@ public class MainMenuManager : MonoBehaviour
             );
     }
     
+    // Scale Down Main Panel Enumerator
     private IEnumerator ScaleDownRectTransform()
     {
         yield return AnimationUI.TweenVec3(
@@ -92,6 +95,7 @@ public class MainMenuManager : MonoBehaviour
         _mainMenuRectTransform.gameObject.SetActive(false);
     }
     
+    // Options Panel MOve away Enumerator
     private IEnumerator OptionsPanelMoveAway()
     {
         yield return AnimationUI.TweenFloat(
@@ -108,6 +112,7 @@ public class MainMenuManager : MonoBehaviour
         _optionsMenuRectTransform.gameObject.SetActive(false);
     }
 
+    // Options Panel MOve inside Enumerator
     private IEnumerator OptionsPanelMoveInside()
     {
         _optionsMenuRectTransform.gameObject.SetActive(true);
@@ -123,8 +128,4 @@ public class MainMenuManager : MonoBehaviour
             AnimationUI.EaseInOutCubic
         );
     }
-    
-    
-    
-    
 }

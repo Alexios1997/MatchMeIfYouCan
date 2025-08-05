@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Level Data
 [CreateAssetMenu(menuName = "Scriptables/Config/Level Config")]
 public class LevelConfig : ScriptableObject
 {

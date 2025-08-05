@@ -2,30 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Implementing the IGenerator As it is A generator Class
 public class BoardGenerator : MonoBehaviour, IGenerator
 {
     [Header("Injected Dependencies")]
     [Space]
-    [Header("Injected Dependencies")]
-    [Tooltip("Table")]
-    [SerializeField] private RectTransform _tableRectTransform;
-    [Tooltip("")]
-    [SerializeField] private GameObject _cardPrefab;
+    [Header("Events")]
+    [SerializeField] private GameEvent _OnBoardGenerated;
     [Space]
-    [Header("Values")]
-    [Tooltip("Table")]
-    [SerializeField] private float _rows;
-    [SerializeField] private float _cols;
+    [Header("Variables")]
+    [SerializeField] private CardListVariable _cardList;
+    [SerializeField] private GameConfig _gameConfig;
+    [SerializeField] private IntVariable _currentLevel;
     [SerializeField] private float _cardPreferedSizeWidth;
     [SerializeField] private float _cardPreferedSizeHeight;
     [Space]
-    [Header("Values")]
-    [SerializeField] private CardListVariable _cardList;
-    [SerializeField] private GameEvent _OnBoardGenerated;
-    [SerializeField] private GameConfig _gameConfig;
-    [SerializeField] private IntVariable _currentLevel;
-
-
+    [Header("GameObjects")]
+    [SerializeField] private GameObject _cardPrefab;
+    [SerializeField] private RectTransform _tableRectTransform;
+    
+    // Private and NOT serialized variables
+    private float _rows;
+    private float _cols;
     private float _calculatedCardWidth;
     private float _calculatedCardHeight;
     private float _sizeWidth;
@@ -33,18 +31,23 @@ public class BoardGenerator : MonoBehaviour, IGenerator
     private float _finalCardWidth;
     private float _finalCardHeight;
     
-    // Start is called before the first frame update
+
     void Start()
     {
+        if (_currentLevel.value > _gameConfig.leveConfigs.Count - 1) return;
+        
         // Initialize Variables
         Initialize();
         // Generate Cards
         Generate();
     }
 
+    // First Initialize our variables 
     private void Initialize()
     {
-
+        
+        
+        // Rows and cols according to current level Config
         _rows = _gameConfig.leveConfigs[_currentLevel.value].rows;
         _cols = _gameConfig.leveConfigs[_currentLevel.value].cols;
         
@@ -60,10 +63,9 @@ public class BoardGenerator : MonoBehaviour, IGenerator
         _sizeHeight = _cardPreferedSizeHeight;
     }
 
-    
+    // Start Generating Cards
     public void Generate()
     {
-
         if ((_rows * _cols) % 2 != 0)
         {
             Debug.LogError("In order to create a card grid for a matching game, it needs to be EVEN number.");
@@ -128,7 +130,5 @@ public class BoardGenerator : MonoBehaviour, IGenerator
             }
         }
         _OnBoardGenerated.Raise();
-        
-
     }
 }
