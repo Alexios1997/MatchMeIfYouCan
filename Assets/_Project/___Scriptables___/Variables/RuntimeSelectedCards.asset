@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e8b748b23914c048ac1c20a7ad038b4, type: 3}
-  m_Name: CardDog
+  m_Script: {fileID: 11500000, guid: af450e3b71b3c0f49a895cc4808849e9, type: 3}
+  m_Name: RuntimeSelectedCards
   m_EditorClassIdentifier: 
-  name: Dog
-  cardFront: {fileID: 21300000, guid: 2b154400397d6984d9291f2bc522d30a, type: 3}
-  cardBack: {fileID: 21300000, guid: eab435a2d7be63543a2c4e65f87f7049, type: 3}
-  flipSound: {fileID: 0}
+  SelectedCards:
+  - {fileID: 0}

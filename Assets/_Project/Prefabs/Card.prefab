@@ -134,5 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161cddec5f28d5840ab5bf9ff7981a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardType: {fileID: 0}
+  _durationToFlipAll: 0.6
+  _OnCardClicked: {fileID: 11400000, guid: 27bdfce1ab16eed4dbfb238eb312c6b1, type: 2}
+  _selectedCardList: {fileID: 11400000, guid: cae787f1ccb01654b935824f4c7ed531, type: 2}
   _imageCard: {fileID: 4994089478344268501}
+  _buttonCard: {fileID: 4994089478344268498}

@@ -16,8 +16,6 @@ public class CardGenerator : MonoBehaviour, IGenerator
     private int _pairs;
     public void Generate()
     {
-       Debug.Log(_cardList.Cards.Count);
-        
        
        // Total pairs that you will need
        _pairs = _cardList.Cards.Count / 2;
@@ -39,7 +37,6 @@ public class CardGenerator : MonoBehaviour, IGenerator
        int rand;
        for (int i = 0; i < _cardList.Cards.Count; i++)
        {
-
            while (true)
            {
                rand = Random.Range(0,_cardConfig._uniqueCardTypes.Count);
@@ -49,11 +46,9 @@ public class CardGenerator : MonoBehaviour, IGenerator
                    break;
                }
            }
-           
            _cardList.Cards[i].GetComponent<Card>().PopulateCard(_cardConfig._uniqueCardTypes[rand]);
        }
-
        
-       //_OnCardsPopulated.Raise();
+       _OnCardsPopulated.Raise();
     }
 }

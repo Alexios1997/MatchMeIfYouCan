@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Cat
   cardFront: {fileID: 21300000, guid: 50496ef9f81b9454e85e1187f2c02433, type: 3}
-  cardBack: {fileID: 0}
+  cardBack: {fileID: 21300000, guid: eab435a2d7be63543a2c4e65f87f7049, type: 3}
   flipSound: {fileID: 0}
