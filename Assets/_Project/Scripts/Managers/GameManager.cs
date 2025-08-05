@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private GameEvent _OnWin;
+    [SerializeField] private CardListVariable _cardListVariable;
+
+    private int counterMatchedCards = 0;
+    public void Start()
+    {
+        counterMatchedCards = 0;
+    }
+    
+    public void CheckRemainingCards()
+    {
+        counterMatchedCards++;
+        if (counterMatchedCards == _cardListVariable.Cards.Count/2)
+        {
+            _OnWin.Raise();
+            Debug.Log("WIN!");
+        }
+    }
+    
+    public void Win()
     {
         
+        // Play ANimation Panel
     }
+    
 }

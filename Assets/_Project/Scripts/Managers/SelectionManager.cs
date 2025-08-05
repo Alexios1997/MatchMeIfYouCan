@@ -27,11 +27,13 @@ public class SelectionManager : MonoBehaviour
             card2.GetCurrentCardType())
         {
             StartCoroutine(StartFlipping(card1,card2,true));
+            _selectedCardListVariable.SelectedCards.Clear();
             _OnMatched.Raise();
         }
         else
         {
             StartCoroutine(StartFlipping(card1,card2,false));
+            _selectedCardListVariable.SelectedCards.Clear();
             _OnMismatched.Raise();
         }
     }
@@ -49,8 +51,6 @@ public class SelectionManager : MonoBehaviour
             card1.FlipCard();
             card2.FlipCard();
         }
-        _selectedCardListVariable.SelectedCards.Clear();
-        
     }
    
 }

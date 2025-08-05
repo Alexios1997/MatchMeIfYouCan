@@ -1,18 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using UnityEngine;
 
-public class SaveManager : MonoBehaviour
+[System.Serializable]
+public class SaveData
 {
-    // Start is called before the first frame update
-    void Start()
+    public int highScore;
+}
+
+public static class SaveManager 
+{
+    private static string savePath => Path.Combine(Application.persistentDataPath, "save.json");
+    
+    public static void Save(SaveData data)
     {
-        
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(savePath, json);
+    }
+    public static SaveData Load()
+    {
+        if (!File.Exists(savePath))
+        {
+            return new SaveData();
+        }
+        string json = File.ReadAllText(savePath);
+        return JsonUtility.FromJson<SaveData>(json);
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void DeleteSave()
     {
-        
+        if (File.Exists(savePath))
+        {
+            File.Delete(savePath);
+        }
     }
 }
