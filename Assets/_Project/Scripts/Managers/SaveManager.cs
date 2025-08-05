@@ -8,6 +8,7 @@ using UnityEngine;
 public class SaveData
 {
     public int highScore;
+    public int level;
 }
 
 public static class SaveManager 

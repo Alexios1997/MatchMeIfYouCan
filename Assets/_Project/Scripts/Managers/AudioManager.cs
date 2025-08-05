@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   [SerializeField] private AudioSource _audioSource;
+   [SerializeField] private AudioClip _buttonClick;
+   [SerializeField] private AudioClip _match;
+   [SerializeField] private AudioClip _mismatch;
+   [SerializeField] private AudioClip _won;
+   
+   public void PlaySoundButtonClick()
+   {
+      _audioSource.PlayOneShot(_buttonClick);
+   }
+
+   public void PlaySoundMatch()
+   {
+      _audioSource.PlayOneShot(_match);
+   }
+   
+   public void PlaySoundMismatch()
+   {
+      _audioSource.PlayOneShot(_mismatch);
+   }
+   
+   public void PlaySoundWin()
+   {
+      _audioSource.PlayOneShot(_won);
+   }
 }

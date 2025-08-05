@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f769282bad05cf740ae3e749b80715d6, type: 3}
-  m_Name: CardConfig_1
+  m_Script: {fileID: 11500000, guid: 6e4d5a0e1c165864aa0f0d01cc321ee7, type: 3}
+  m_Name: Level_1
   m_EditorClassIdentifier: 
+  rows: 2
+  cols: 2
   _uniqueCardTypes:
   - {fileID: 11400000, guid: 602776ea40fd8da4d816a81c6026aee0, type: 2}
   - {fileID: 11400000, guid: 590c38e311450b048ab8f5f3cb8352fd, type: 2}
-  - {fileID: 11400000, guid: 51c01d82d1bcdbd43a70c90471ab25b4, type: 2}
-  - {fileID: 11400000, guid: d8ccc910d0ccc0941b704932e7967128, type: 2}
-  - {fileID: 11400000, guid: df16c6dcd8c6226419c80ab5890213b3, type: 2}
-  - {fileID: 11400000, guid: 99923e6dc1779ee4cb90039bc9d0297d, type: 2}

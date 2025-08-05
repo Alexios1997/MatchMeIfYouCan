@@ -9,7 +9,8 @@ public class CardGenerator : MonoBehaviour, IGenerator
     
     [SerializeField] private GameEvent _OnCardsPopulated;
     [SerializeField] private CardListVariable _cardList;
-    [SerializeField] private CardConfig _cardConfig;
+    [SerializeField] private IntVariable _currentLevel;
+    [SerializeField] private GameConfig _gameConfig;
 
 
     private List<int> _uniqueCardTypesCounter = new List<int>();
@@ -21,13 +22,13 @@ public class CardGenerator : MonoBehaviour, IGenerator
        _pairs = _cardList.Cards.Count / 2;
        
        // Pairs should be the number of unique Ids you have in your card config Always 
-       if (_pairs !=  _cardConfig._uniqueCardTypes.Count)
+       if (_pairs !=  _gameConfig.leveConfigs[_currentLevel.value]._uniqueCardTypes.Count)
        {
            Debug.LogError(" You cannot have more number of pairs than the unique Card Types");
            return;
        }
 
-       for (int i = 0; i < _cardConfig._uniqueCardTypes.Count; i++)
+       for (int i = 0; i < _gameConfig.leveConfigs[_currentLevel.value]._uniqueCardTypes.Count; i++)
        {
            _uniqueCardTypesCounter.Add(0);
        }
@@ -39,14 +40,14 @@ public class CardGenerator : MonoBehaviour, IGenerator
        {
            while (true)
            {
-               rand = Random.Range(0,_cardConfig._uniqueCardTypes.Count);
+               rand = Random.Range(0,_gameConfig.leveConfigs[_currentLevel.value]._uniqueCardTypes.Count);
                if (_uniqueCardTypesCounter[rand] < 2)
                {
                    _uniqueCardTypesCounter[rand]++;
                    break;
                }
            }
-           _cardList.Cards[i].GetComponent<Card>().PopulateCard(_cardConfig._uniqueCardTypes[rand]);
+           _cardList.Cards[i].GetComponent<Card>().PopulateCard(_gameConfig.leveConfigs[_currentLevel.value]._uniqueCardTypes[rand]);
        }
        
        _OnCardsPopulated.Raise();

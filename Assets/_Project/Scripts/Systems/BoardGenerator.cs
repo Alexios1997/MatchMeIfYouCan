@@ -22,6 +22,8 @@ public class BoardGenerator : MonoBehaviour, IGenerator
     [Header("Values")]
     [SerializeField] private CardListVariable _cardList;
     [SerializeField] private GameEvent _OnBoardGenerated;
+    [SerializeField] private GameConfig _gameConfig;
+    [SerializeField] private IntVariable _currentLevel;
 
 
     private float _calculatedCardWidth;
@@ -34,10 +36,6 @@ public class BoardGenerator : MonoBehaviour, IGenerator
     // Start is called before the first frame update
     void Start()
     {
-        // Async all these
-        
-        // First Save / Load
-        
         // Initialize Variables
         Initialize();
         // Generate Cards
@@ -46,6 +44,10 @@ public class BoardGenerator : MonoBehaviour, IGenerator
 
     private void Initialize()
     {
+
+        _rows = _gameConfig.leveConfigs[_currentLevel.value].rows;
+        _cols = _gameConfig.leveConfigs[_currentLevel.value].cols;
+        
         // Clear List
         _cardList.Clear();
         

@@ -11,20 +11,23 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] private int _score;
     [SerializeField] private int _turns;
-
+    [SerializeField] private IntVariable _currentLevel;
     
     private SaveData _currentSave;
     
-    private void Start()
+    private void Awake()
     {
         _currentSave = SaveManager.Load();
         if (_currentSave == null)
         {
+            Debug.Log("Nothing yet");
             _score = 0;
+            _currentLevel.value = 0;
         }
         else
         {
             _score = _currentSave.highScore;
+            _currentLevel.value =  _currentSave.level;
         }
         _turns = 0;
         DisplayTurns();
@@ -54,9 +57,18 @@ public class ScoreManager : MonoBehaviour
         _turnText.text = "Turns: " + _turns;
     }
 
-    public void SaveScore()
+    public void Save()
     {
+        StartCoroutine(WaitAndSave());
+
+    }
+
+    IEnumerator WaitAndSave()
+    {
+        yield return new WaitForSeconds(1f);
+        _currentLevel.value++;
         _currentSave.highScore = _score;
+        _currentSave.level = _currentLevel.value;
         SaveManager.Save(_currentSave);
     }
     
